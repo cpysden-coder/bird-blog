@@ -1,16 +1,8 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
+const userRoutes = require('./userRoutes');
+const postRoutes = require('./postRoutes');
 
-const userRoutes = require("./userController");
-router.use("/users", userRoutes);
+router.use('/users', userRoutes);
+router.use('/posts', postRoutes);
 
-const birdRoutes = require("./birdController");
-router.use("/birds", birdRoutes);
-
-const locationRoutes = require("./locationController");
-router.use("/locations", locationRoutes);
-
-const postRoutes = require("./postController");
-router.use("/posts", postRoutes);
-
-module.exports=router;
+module.exports = router;

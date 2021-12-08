@@ -1,25 +1,23 @@
-const User = require("./user");
-const Post = require("./post");
-const Bird = require("./bird")
-const Location = require("./location")
-// const Group = require("./Group");
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
 
-User.hasMany(Post);
-Post.belongsTo(User);
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
 
-// User.belongsToMany(Group,{
-//     through:"UserGroup"
-// })
+Post.belongsTo(User, {
+  foreignKey: 'user_id'
+});
 
-// Group.belongsToMany(User,{
-//     through:"UserGroup"
-// })
+Post.hasMany(Comment,  {
+    foreignKey: 'post_id',
+    onDelete: 'CASCADE'
+})
 
-module.exports={
-    //if the value of the variable is same name as key, you can omit the key and just ref variable (see the 2 examples below)
-    User: User,
-    Post,
-    Bird,
-    Location
-    // Group
-};
+Comment.belongsTo(User, {
+    foreignKey: 'user_id'
+})
+
+module.exports = { User, Post, Comment };
